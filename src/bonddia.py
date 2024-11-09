@@ -1,5 +1,6 @@
 import os
 import requests
+import datetime
 
 # Variables d'entorn
 API_BASE_URL = os.getenv("MASTODON_API_BASE_URL")
@@ -25,5 +26,5 @@ def envia(missatge):
 
 
 if __name__ == "__main__":
-    missatge = "BONDDIA"
+    missatge = f"BONDDIA {datetime.date.today().isoformat()}"
     envia(missatge)
