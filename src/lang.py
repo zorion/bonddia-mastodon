@@ -1,22 +1,38 @@
 from html.parser import HTMLParser
 import requests
+import pickle
 
 URL_SOURCE = "http://www.rogerdarlington.me.uk/Goodmorning.html"
-CACHE_FILE = "bondia.html"
+CACHE_WEB = "bondia.html"
+CACHE_PARSED = "bondia_parsed.dict"
 
 
-def get_text():
+def download_source():
     try:
         response = requests.get(URL_SOURCE)
         response.raise_for_status()
         text = response.text
-        with open(CACHE_FILE, "w") as f:
+        with open(CACHE_WEB, "w") as f:
             f.write(text)
     except Exception as err:
         print(f"Error baixant el document: {err}, fent servir cache.")
-        with open(CACHE_FILE, "r") as f:
+        with open(CACHE_WEB, "r") as f:
             text = f.read()
     return text
+
+
+def get_langs():
+    try:
+        with open(CACHE_PARSED, "rb") as f:
+            langs = pickle.load(f)
+        print("Got langs from cache")
+    except FileNotFoundError:
+        text = download_source()
+        langs = parse_lang(text)
+        with open(CACHE_PARSED, "wb") as f:
+            pickle.dump(langs, f)
+        print("Downloaded langs:", langs)
+    return langs
 
 
 def parse_lang(text):

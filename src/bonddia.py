@@ -46,10 +46,9 @@ def selecciona_idioma(traduccions: dict[str]) -> tuple[str, str]:
 
 def obtenir_traduccions() -> str:
     try:
-        from .lang import get_text, parse_lang
+        from .lang import get_langs
 
-        html_data = get_text()
-        return parse_lang(html_data)
+        return get_langs()
     except Exception as err:
         print(f"Error aconseguint les traduccions: {err}")
         return {"catalan": "Bon dia"}
