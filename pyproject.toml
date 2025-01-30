@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Mastodon bot for bond diagrams"
 requires-python = ">=3.8"
 dependencies = [
-    "requests",
+    "requests>=2.32.3",
 ]
 
 [build-system]
@@ -13,3 +13,22 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 packages = ["src"]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.2.0",
+    "pytest",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+]
