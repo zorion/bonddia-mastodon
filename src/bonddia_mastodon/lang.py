@@ -1,6 +1,7 @@
-from html.parser import HTMLParser
-import requests
 import pickle
+from html.parser import HTMLParser
+
+import requests
 
 URL_SOURCE = "http://www.rogerdarlington.me.uk/Goodmorning.html"
 CACHE_WEB = "bondia.html"
