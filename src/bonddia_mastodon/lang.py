@@ -1,11 +1,11 @@
-import pickle
+import json
 from html.parser import HTMLParser
 
 import requests
 
 URL_SOURCE = "http://www.rogerdarlington.me.uk/Goodmorning.html"
 CACHE_WEB = "bondia.html"
-CACHE_PARSED = "bondia_parsed.dict"
+CACHE_PARSED = "data.json"
 
 
 def download_source():
@@ -25,13 +25,13 @@ def download_source():
 def get_langs():
     try:
         with open(CACHE_PARSED, "rb") as f:
-            langs = pickle.load(f)
+            langs = json.load(f)
         print("Got langs from cache")
     except FileNotFoundError:
         text = download_source()
         langs = parse_lang(text)
         with open(CACHE_PARSED, "wb") as f:
-            pickle.dump(langs, f)
+            json.dump(langs, f, indent=4)
         print("Downloaded langs:", langs)
     return langs
 
