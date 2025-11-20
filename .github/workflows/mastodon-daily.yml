@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '23 7 * * *'
+    - cron: '19 7 * * *'
 
 jobs:
   toot:
